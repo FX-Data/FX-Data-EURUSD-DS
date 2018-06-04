@@ -1,6 +1,10 @@
 language: python
 python:
 - '3.4'
+branches:
+  except:
+    - master
+    - ci
 env:
   matrix:
     - FORMAT=hst TF=M1
@@ -56,7 +60,7 @@ after_script:
 deploy:
   provider: releases
   api_key:
-    secure: wZfruJ+KVDfyOGnJbhE2PiYmcHoSY470hQEumXeQ+pFnv+803xXmKBJ/VmCZtbbbVR0hxuucsgpM7srCn5Emz2PkpiCUKwaXTKZqnk+L3BVHdlP2gY0wZoHKRh5znNeYB24XyANlE5IEUAot7B5vmBj6Yo/F0zirIm8hltjFryqQhSNWyGyzhoE4Mkpp2Xwlqr4SqHhkgHSN/WphLsbmZGWHVSYpJAot4nGHlxwZF0Xw0RIRSmO3wCWCHVQIYI5AOOjZJre9t+WaKHfOqlmvrqgw1y6PzLSAtcApUFJoy7DGNTkpQTTuXpU+MuDoacUyaelMbXxGQm68fxtZx4gtEv3iCWjlRQFkYMqjYpaf5FkgW/a9L2Y+DiW/f1QeJzstyZn3Im6MrL9wPat7V+VhhRTv1+Fnpj1+hqTuKydtOtBVvCAPwDZO0jjXINjkhzEMwLP1toHSkGP6G10G4ZP2CMTtxcCXSvoZpeGroZm6dgNKA/yeLwYzg/TrQBM5152EcKtyOH5Tv5Vs7MHEUKT+cZ249cpLmWH0DSg2Hws9gQk129QAKBzG/36ENLalhrC8uCl5agxFOyfd79SvI8aevrMZgPIYJ2UZELVGD7wplIiMHMhbqXlThRt7gfrnzCBGhP4foCaHG9DtKlqJEDumZNpfCtI/YHYyx6chEtTpgpk=
+    secure: "oYt8oaYzrQFqH/l5xuq9+0i/ArJfiqr+pVzVbPoeEHyFoPd2J/5yCiLZWByQgvGbdqUk4BeZzAwrrL8nlH7xtk9jQTMX1DSB+NOGBaIf5BDUbr3sZyCtOWiDbPeDg58weBSJ9idTWUVAbwQNTJcyhFA3Ck2aXXVCM2euQNF0Doa9hk8sVlOXZnw56T80mnwbAID5ILpRKn0crEAIMP7kkhkQ9NEhzWbuTGD/aQcpNlb9A6DdTTAWmfFY8nsxApywhlzXpLqP2a+c5Glm1tQx0uwUhiriOgn6Gx9bZmxHsIwnfGiAzfD98gZQhmHGQsqHVUpJNq15WueLv9sLS4VhBklNCDbJM+fSBmv9Krd6oaoKCa0ibV3lHNQ6Hx5n9nEwYzbKc8H89tTRp5FnSVq3w90ZHAEp/9o4yFywfVes7tPbjAP3iyMj6v79RZjo9xvmfDY1Nv/4ALxJlLLqX6l9RgaTPrSOPRzifX9rWh0z9BuXRPXfthovA86NmVzRY82wPWekhdpa+VuE+WRUCPNmX0nqlcpp8Gki3vjl+wWNYD4cN4WAEK1CnBfHWAvzESj+gmdzRjAdJ94JynR1G7FVL3PPdaboyukpGgzND5LaT0XwPk+F4r/FO7g9UyCUSXgl2DlynasXnkjlP4WjTeRU5TV1N/JXVS8bRK6zgXos8mw="
   file:
     - "*.hst.gz"
     - "*.fxt.gz"
