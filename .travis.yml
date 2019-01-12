@@ -3,40 +3,40 @@ python:
 - '3.4'
 branches:
   except:
-    - master
-    - ci
+  - master
+  - ci
 env:
   matrix:
-    - FORMAT=hst TF=M1
-    - FORMAT=hst TF=M2
-    - FORMAT=hst TF=M3
-    - FORMAT=hst TF=M4
-    - FORMAT=hst TF=M5
-    - FORMAT=hst TF=M6
-    - FORMAT=hst TF=M10
-    - FORMAT=hst TF=M12
-    - FORMAT=hst TF=M15
-    - FORMAT=hst TF=M20
-    - FORMAT=hst TF=M30
-    - FORMAT=hst TF=H1
-    - FORMAT=hst TF=H2
-    - FORMAT=hst TF=H3
-    - FORMAT=hst TF=H4
-    - FORMAT=hst TF=H6
-    - FORMAT=hst TF=H8
-    - FORMAT=hst TF=H12
-    - FORMAT=hst TF=D1
-    - FORMAT=hst TF=W1
-    - FORMAT=hst TF=MN1
-    - FORMAT=fxt TF=M1
-    - FORMAT=fxt TF=M5
-    - FORMAT=fxt TF=M15
-    - FORMAT=fxt TF=M30
-    - FORMAT=fxt TF=H1
-    - FORMAT=fxt TF=H4
-    - FORMAT=fxt TF=D1
-    - FORMAT=fxt TF=W1
-    - FORMAT=fxt TF=MN1
+  - FORMAT=hst TF=M1
+  - FORMAT=hst TF=M2
+  - FORMAT=hst TF=M3
+  - FORMAT=hst TF=M4
+  - FORMAT=hst TF=M5
+  - FORMAT=hst TF=M6
+  - FORMAT=hst TF=M10
+  - FORMAT=hst TF=M12
+  - FORMAT=hst TF=M15
+  - FORMAT=hst TF=M20
+  - FORMAT=hst TF=M30
+  - FORMAT=hst TF=H1
+  - FORMAT=hst TF=H2
+  - FORMAT=hst TF=H3
+  - FORMAT=hst TF=H4
+  - FORMAT=hst TF=H6
+  - FORMAT=hst TF=H8
+  - FORMAT=hst TF=H12
+  - FORMAT=hst TF=D1
+  - FORMAT=hst TF=W1
+  - FORMAT=hst TF=MN1
+  - FORMAT=fxt TF=M1
+  - FORMAT=fxt TF=M5
+  - FORMAT=fxt TF=M15
+  - FORMAT=fxt TF=M30
+  - FORMAT=fxt TF=H1
+  - FORMAT=fxt TF=H4
+  - FORMAT=fxt TF=D1
+  - FORMAT=fxt TF=W1
+  - FORMAT=fxt TF=MN1
 addons:
   apt:
     packages:
@@ -60,10 +60,10 @@ after_script:
 deploy:
   provider: releases
   api_key:
-    secure: "oYt8oaYzrQFqH/l5xuq9+0i/ArJfiqr+pVzVbPoeEHyFoPd2J/5yCiLZWByQgvGbdqUk4BeZzAwrrL8nlH7xtk9jQTMX1DSB+NOGBaIf5BDUbr3sZyCtOWiDbPeDg58weBSJ9idTWUVAbwQNTJcyhFA3Ck2aXXVCM2euQNF0Doa9hk8sVlOXZnw56T80mnwbAID5ILpRKn0crEAIMP7kkhkQ9NEhzWbuTGD/aQcpNlb9A6DdTTAWmfFY8nsxApywhlzXpLqP2a+c5Glm1tQx0uwUhiriOgn6Gx9bZmxHsIwnfGiAzfD98gZQhmHGQsqHVUpJNq15WueLv9sLS4VhBklNCDbJM+fSBmv9Krd6oaoKCa0ibV3lHNQ6Hx5n9nEwYzbKc8H89tTRp5FnSVq3w90ZHAEp/9o4yFywfVes7tPbjAP3iyMj6v79RZjo9xvmfDY1Nv/4ALxJlLLqX6l9RgaTPrSOPRzifX9rWh0z9BuXRPXfthovA86NmVzRY82wPWekhdpa+VuE+WRUCPNmX0nqlcpp8Gki3vjl+wWNYD4cN4WAEK1CnBfHWAvzESj+gmdzRjAdJ94JynR1G7FVL3PPdaboyukpGgzND5LaT0XwPk+F4r/FO7g9UyCUSXgl2DlynasXnkjlP4WjTeRU5TV1N/JXVS8bRK6zgXos8mw="
+    secure: wFv2d292TLm9j+gmRoO+DntdmPRmwmttEr3v/iF0RDZqMvMtH6orlx0zFgJGDFj7Gp3ne76I9vktjheou4NBfbRVVJFdLM3kIQr6G6AbISVYmfUiVno3Kro8XIR9uRwIM7EI6aOfjU/UnQu6RZ9/uPPnSEoNVB146dSBkKLv20cYOIHRavU9GbaCZgElzNJr2inv9ekk3QEoIEU0kAk+uKw0aqa7VVzE4M1tIJX17A9AQMPTBk8IW7VPQBtGWGp/L2Z2d7ybT0sVE7hnkbSphAphleSGVClSSg7gBhrbgHM8OBoU1NUAr8QHvJbBLlFc+WEMF53eYX59dIk04hZBYs0D64QJtH+vSQPenl46FnroXLO6dIIYtwAN8MzrbRnASCvelsjVmfuMbw79AnWAJy9/7t/Nh2DIH1Uc5Qkd9bzqavBCbQbj6retpEpZULPaBYVarYo6ZFbrnXKHXZYYsTogKIzZ/2ptogCevi0VF1SJ5E48OFYYyv9dyunMZc4aHNN+QKM+0kHU4usM52vs46yBWYwco/L3/jNo6/lC84F2uHFHfOP3zezSaWpOPrwwz56BoG00TUgX0r9KP4mAi2pZEPUpQCpOyO573lC+whtG5qh/vR0N5fr4h24DjybD5mEHGqG79AJEVtILAgd/U9TiBDPbacpI0sftas+ciuI=
   file:
-    - "*.hst.gz"
-    - "*.fxt.gz"
+  - "*.hst.gz"
+  - "*.fxt.gz"
   file_glob: true
   skip_cleanup: true
   overwrite: true
