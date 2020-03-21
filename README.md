@@ -18,3 +18,4 @@ Choose the appropriate branch to fetch the data.
 | 2016 | [![Build Status](https://api.travis-ci.org/FX-Data/FX-Data-EURUSD-DS.svg?branch=2016)](https://travis-ci.org/FX-Data/FX-Data-EURUSD-DS/branches) |
 | 2017 | [![Build Status](https://api.travis-ci.org/FX-Data/FX-Data-EURUSD-DS.svg?branch=2017)](https://travis-ci.org/FX-Data/FX-Data-EURUSD-DS/branches) |
 | 2018 | [![Build Status](https://api.travis-ci.org/FX-Data/FX-Data-EURUSD-DS.svg?branch=2018)](https://travis-ci.org/FX-Data/FX-Data-EURUSD-DS/branches) |
+| 2019 | [![Build Status](https://api.travis-ci.org/FX-Data/FX-Data-EURUSD-DS.svg?branch=2019)](https://travis-ci.org/FX-Data/FX-Data-EURUSD-DS/branches) |
