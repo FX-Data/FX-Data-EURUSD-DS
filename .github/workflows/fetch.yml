@@ -31,3 +31,28 @@ jobs:
         with:
           name: CSV
           path: '**/*.csv'
+  Push:
+    runs-on: ubuntu-latest
+    needs: [Fetch]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v2
+        with:
+          name: CSV
+          path: .
+      - name: Commit files
+        env:
+          COMMIT_MSG: Adds CSV files
+          GIT_EMAIL: ${{ github.actor }}@users.noreply.github.com
+          GIT_NAME: ${{ github.actor }}
+        run: |
+          git config --local core.autocrlf false
+          git config --local user.email $GIT_EMAIL
+          git config --local user.name $GIT_NAME
+          git add **/*.csv && git add --renormalize **/*.csv
+          git pull origin ${{ github.ref }} --autostash --rebase -X ours
+          NO_PAGER=1 git status
+          git commit --allow-empty -am "$COMMIT_MSG"
+          NO_PAGER=1 git status
