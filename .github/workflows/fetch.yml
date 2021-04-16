@@ -1,0 +1,25 @@
+---
+name: Fetch
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+  push:
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        day: [2]
+        month: [2]
+        year: [2020]
+        pair: [EURUSD]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: fx31337/fx-data-download-action@v1
+        with:
+          Days: ${{ matrix.day }}
+          Months: ${{ matrix.month }}
+          Years: ${{ matrix.year }}
+          Pairs: ${{ matrix.pair }}
