@@ -3,8 +3,9 @@ name: Fetch
 
 # yamllint disable-line rule:truthy
 on:
-  pull_request:
   push:
+    branches:
+      - '*-20*'
 
 jobs:
   Fetch:
