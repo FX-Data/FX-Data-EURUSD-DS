@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        day: [2]
-        month: [2]
+        day: [all]
+        month: [1]
         year: [2020]
         pair: [EURUSD]
     steps:
