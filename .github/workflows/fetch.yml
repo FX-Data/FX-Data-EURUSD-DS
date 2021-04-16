@@ -56,3 +56,8 @@ jobs:
           NO_PAGER=1 git status
           git commit --allow-empty -am "$COMMIT_MSG"
           NO_PAGER=1 git status
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
