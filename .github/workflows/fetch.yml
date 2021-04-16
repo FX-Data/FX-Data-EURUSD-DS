@@ -23,13 +23,10 @@ jobs:
           Months: ${{ matrix.month }}
           Years: ${{ matrix.year }}
           Pairs: ${{ matrix.pair }}
-      - name: Combine files
-        run: find . -name '*.csv' -print0 | sort -z | xargs -r0 cat | tee all.csv > /dev/null
-      - uses: fx31337/fx-data-convert-action@master
+      - name: Print CSV files
+        run: find . -name "*.csv" -print
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
         with:
-          InputFile: all.csv
-          OutputFormat: hst
-      - uses: fx31337/fx-data-convert-action@master
-        with:
-          InputFile: all.csv
-          OutputFormat: fxt
+          name: CSV
+          path: '**/*.csv'
