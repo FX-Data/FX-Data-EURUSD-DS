@@ -7,7 +7,7 @@ on:
   push:
 
 jobs:
-  Test:
+  Fetch:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,9 +17,19 @@ jobs:
         pair: [EURUSD]
     steps:
       - uses: actions/checkout@v2
-      - uses: fx31337/fx-data-download-action@v1
+      - uses: fx31337/fx-data-download-action@master
         with:
           Days: ${{ matrix.day }}
           Months: ${{ matrix.month }}
           Years: ${{ matrix.year }}
           Pairs: ${{ matrix.pair }}
+      - name: Combine files
+        run: find . -name '*.csv' -print0 | sort -z | xargs -r0 cat | tee all.csv > /dev/null
+      - uses: fx31337/fx-data-convert-action@master
+        with:
+          InputFile: all.csv
+          OutputFormat: hst
+      - uses: fx31337/fx-data-convert-action@master
+        with:
+          InputFile: all.csv
+          OutputFormat: fxt
