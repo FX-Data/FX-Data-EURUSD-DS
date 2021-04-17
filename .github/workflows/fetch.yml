@@ -64,7 +64,7 @@ jobs:
           git add **/*.csv && git add --renormalize **/*.csv
           git pull origin ${{ github.ref }} --autostash --rebase -X ours
           NO_PAGER=1 git status
-          git commit -am "$COMMIT_MSG"
+          git commit -am "$COMMIT_MSG" || true
           NO_PAGER=1 git status
       - name: Push changes
         uses: ad-m/github-push-action@master
