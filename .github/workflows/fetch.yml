@@ -27,9 +27,6 @@ jobs:
       - name: Get year
         run: echo "YEAR=$(echo ${GITHUB_REF##*-})" >> $GITHUB_ENV
         shell: bash
-      - name: Get user
-        run: echo "USER=$(id -un)" >> $GITHUB_ENV
-        shell: bash
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
@@ -39,8 +36,6 @@ jobs:
           Months: ${{ matrix.month }}
           Years: ${{ env.YEAR }}
           Pairs: ${{ env.PAIR }}
-      - name: Adjust permissions
-        run: chown -R "${{ env.USER }}" .
       - name: Lists CSV files
         run: find . -name "*.csv" -ls
       - name: Commit files
