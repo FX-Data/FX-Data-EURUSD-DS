@@ -44,12 +44,21 @@ jobs:
           git config --local core.autocrlf false
           git config --local user.email $GIT_EMAIL
           git config --local user.name $GIT_NAME
-          git add **/*.csv && git add --renormalize **/*.csv
           git pull origin ${{ github.ref }} --autostash --rebase -X ours
+          git add **/*.csv && git add --renormalize **/*.csv
           NO_PAGER=1 git status
           git commit --allow-empty -am "$COMMIT_MSG"
           NO_PAGER=1 git status
       - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Re-pull on failure
+        if: ${{ failure() }}
+        run: git pull origin ${{ github.ref }} --autostash --rebase -X ours
+      - name: Re-push on failure
+        if: ${{ failure() }}
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
