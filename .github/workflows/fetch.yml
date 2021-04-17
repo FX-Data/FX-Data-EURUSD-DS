@@ -1,0 +1,65 @@
+---
+name: Fetch
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches:
+      - '*-20*'
+
+jobs:
+  Fetch:
+    env:
+      GITHUB_REF: ${{ github.ref }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        day: [all]
+        month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    steps:
+      - name: Get branch
+        run: echo "GITHUB_BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+        shell: bash
+      - name: Get pair
+        run: echo "PAIR=$(echo ${GITHUB_BRANCH%%-*})" >> $GITHUB_ENV
+        shell: bash
+      - name: Get year
+        run: echo "YEAR=$(echo ${GITHUB_REF##*-})" >> $GITHUB_ENV
+        shell: bash
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: fx31337/fx-data-download-action@master
+        with:
+          Days: ${{ matrix.day }}
+          Months: ${{ matrix.month }}
+          Years: ${{ env.YEAR }}
+          Pairs: ${{ env.PAIR }}
+      - name: Commit files
+        env:
+          COMMIT_MSG: Adds CSV files for ${{ env.PAIR }} ${{ env.YEAR }}
+          GIT_EMAIL: ${{ github.actor }}@users.noreply.github.com
+          GIT_NAME: ${{ github.actor }}
+        run: |
+          git config --local core.autocrlf false
+          git config --local user.email $GIT_EMAIL
+          git config --local user.name $GIT_NAME
+          git add **/*.csv && git add --renormalize **/*.csv
+          git commit -avm "$COMMIT_MSG" || true
+          git pull origin ${{ github.ref }} --no-edit -X ours
+          NO_PAGER=1 git status
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Re-pull on failure
+        if: ${{ failure() }}
+        run: git pull origin ${{ github.ref }} --no-edit -X ours
+      - name: Re-push on failure
+        if: ${{ failure() }}
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
