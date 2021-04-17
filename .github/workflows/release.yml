@@ -1,0 +1,45 @@
+---
+name: Release
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    tags:
+    - '20*'
+
+jobs:
+  Release:
+    env:
+      FORMAT: ${{ matrix.format }}
+      TF: ${{ matrix.tf }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        format: [hst, fxt]
+        tf: [M30, H1, H8, D1, W1, MN1]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get pair
+        run: echo "PAIR=$(ls -1d ??????)" >> $GITHUB_ENV
+        shell: bash
+      - name: Get tag name
+        run: echo "GITHUB_TAG=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+        shell: bash
+      - name: Combine files
+        run: find . -name '*.csv' -print0 | sort -z | xargs -r0 cat | tee all.csv > /dev/null
+      - uses: fx31337/fx-data-convert-action@master
+        with:
+          CmdArgs: -t ${{ matrix.tf }}
+          InputFile: all.csv
+          OutputFormat: ${{ matrix.format }}
+          Pair: ${{ env.PAIR }}
+      - name: Compress
+        run: gzip -v *.${{ matrix.format }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            *.${{ matrix.format }}.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
