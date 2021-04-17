@@ -9,21 +9,30 @@ on:
 
 jobs:
   Fetch:
+    env:
+      GITHUB_REF: ${{ github.ref }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         day: [all]
         month: [1]
-        year: [2020]
-        pair: [EURUSD]
     steps:
+      - name: Get branch
+        run: echo "GITHUB_BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+        shell: bash
+      - name: Get pair
+        run: echo "PAIR=$(echo ${GITHUB_BRANCH%%-*})" >> $GITHUB_ENV
+        shell: bash
+      - name: Get year
+        run: echo "YEAR=$(echo ${GITHUB_REF##*-})" >> $GITHUB_ENV
+        shell: bash
       - uses: actions/checkout@v2
       - uses: fx31337/fx-data-download-action@master
         with:
           Days: ${{ matrix.day }}
           Months: ${{ matrix.month }}
-          Years: ${{ matrix.year }}
-          Pairs: ${{ matrix.pair }}
+          Years: ${{ env.YEAR }}
+          Pairs: ${{ env.PAIR }}
       - name: Print CSV files
         run: find . -name "*.csv" -print
       - name: Upload artifacts
