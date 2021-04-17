@@ -5,7 +5,7 @@ name: Release
 on:
   push:
     tags:
-    - '20*'
+      - '20*'
 
 jobs:
   Release:
@@ -16,7 +16,28 @@ jobs:
     strategy:
       matrix:
         format: [hst, fxt]
-        tf: [M30, H1, H8, D1, W1, MN1]
+        tf:
+          - M1
+          - M2
+          - M3
+          - M4
+          - M5
+          - M6
+          - M10
+          - M12
+          - M15
+          - M20
+          - M30
+          - H1
+          - H2
+          - H3
+          - H4
+          - H6
+          - H8
+          - H12
+          - D1
+          - W1
+          - MN1
     steps:
       - uses: actions/checkout@v2
       - name: Get pair
@@ -26,7 +47,13 @@ jobs:
         run: echo "GITHUB_TAG=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
         shell: bash
       - name: Combine files
-        run: find . -name '*.csv' -print0 | sort -z | xargs -r0 cat | tee all.csv > /dev/null
+        run: >-
+          find . -name '*.csv' -print0
+          | sort -z
+          | xargs -r0 cat
+          | tee all.csv > /dev/null
+      - name: Check free space
+        run: df -h
       - uses: fx31337/fx-data-convert-action@master
         with:
           CmdArgs: -t ${{ matrix.tf }}
