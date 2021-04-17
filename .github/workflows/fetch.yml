@@ -36,6 +36,8 @@ jobs:
           Months: ${{ matrix.month }}
           Years: ${{ env.YEAR }}
           Pairs: ${{ env.PAIR }}
+      - name: Lists CSV files
+        run: find . -name "*.csv" -ls
       - name: Commit files
         env:
           COMMIT_MSG: Adds CSV files for ${{ env.PAIR }} ${{ env.YEAR }}
