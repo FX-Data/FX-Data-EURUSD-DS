@@ -60,8 +60,8 @@ jobs:
           git config --local core.autocrlf false
           git config --local user.email $GIT_EMAIL
           git config --local user.name $GIT_NAME
-          git pull origin ${{ github.ref }} --autostash --rebase -X ours
           git add **/*.csv && git add --renormalize **/*.csv
+          git pull origin ${{ github.ref }} --autostash --rebase -X ours
           NO_PAGER=1 git status
           git commit --allow-empty -am "$COMMIT_MSG"
           NO_PAGER=1 git status
