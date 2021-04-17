@@ -46,9 +46,8 @@ jobs:
           git config --local user.email $GIT_EMAIL
           git config --local user.name $GIT_NAME
           git add **/*.csv && git add --renormalize **/*.csv
-          git pull origin ${{ github.ref }} --autostash --rebase -X ours
-          NO_PAGER=1 git status
-          git commit -am "$COMMIT_MSG" || true
+          git commit -avm "$COMMIT_MSG" || true
+          git pull origin ${{ github.ref }} --no-edit -X ours
           NO_PAGER=1 git status
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -57,7 +56,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Re-pull on failure
         if: ${{ failure() }}
-        run: git pull origin ${{ github.ref }} --autostash --rebase -X ours
+        run: git pull origin ${{ github.ref }} --no-edit -X ours
       - name: Re-push on failure
         if: ${{ failure() }}
         uses: ad-m/github-push-action@master
