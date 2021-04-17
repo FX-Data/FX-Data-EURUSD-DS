@@ -5,7 +5,7 @@ name: Release
 on:
   push:
     tags:
-    - '20*'
+      - '20*'
 
 jobs:
   Release:
@@ -16,27 +16,42 @@ jobs:
     strategy:
       matrix:
         format: [hst, fxt]
-        tf: [M30, H1, H8, D1, W1, MN1]
+        tf:
+          - M1
+          - M2,M3,M4
+          - M5,M6,M10,M12
+          - M15,M20,M30
+          - H1,H2,H3,H4,H6,H8,H12
+          - D1,W1,MN1
+      max-parallel: 8
     steps:
+      - uses: actions/checkout@v2
+      - name: Get pair
+        run: echo "PAIR=$(ls -1d ??????)" >> $GITHUB_ENV
+        shell: bash
       - name: Get tag name
         run: echo "GITHUB_TAG=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
         shell: bash
-      - uses: actions/checkout@v2
       - name: Combine files
-        run: find . -name '*.csv' -print0 | sort -z | xargs -r0 cat | tee all.csv > /dev/null
+        run: >-
+          find . -name '*.csv' -print0
+          | sort -z
+          | xargs -r0 cat
+          | tee all.csv > /dev/null
+      - name: Check free space
+        run: df -h
       - uses: fx31337/fx-data-convert-action@master
         with:
-          CmdArgs: -t ${{ matrix.tf }} -v
+          CmdArgs: -t ${{ matrix.tf }}
           InputFile: all.csv
           OutputFormat: ${{ matrix.format }}
-          Pair: ${{ env.GITHUB_TAG }}
+          Pair: ${{ env.PAIR }}
       - name: Compress
         run: gzip -v *.${{ matrix.format }}
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - uses: ncipollo/release-action@v1
         with:
-          files: |
-            *.${{ matrix.format }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          artifacts: |
+            *.${{ matrix.format }}.gz
+          replacesArtifacts: true
+          token: ${{ secrets.GITHUB_TOKEN }}
