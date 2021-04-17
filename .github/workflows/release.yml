@@ -48,11 +48,10 @@ jobs:
           Pair: ${{ env.PAIR }}
       - name: Compress
         run: gzip -v *.${{ matrix.format }}
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - uses: ncipollo/release-action@v1
         with:
-          files: |
+          allowUpdates: true
+          artifacts: |
             *.${{ matrix.format }}.gz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          replacesArtifacts: true
+          token: ${{ secrets.GITHUB_TOKEN }}
