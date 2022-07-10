@@ -21,6 +21,7 @@ Choose the appropriate branch to fetch the data.
 | 2019 | [![Status][gh-img-fetch-2019]][gh-lnk-fetch-2019] | [![Status][gh-img-tag-2019]][gh-lnk-tag-2019] |
 | 2020 | [![Status][gh-img-fetch-2020]][gh-lnk-fetch-2020] | [![Status][gh-img-tag-2020]][gh-lnk-tag-2020] |
 | 2021 | [![Status][gh-img-fetch-2021]][gh-lnk-fetch-2021] | [![Status][gh-img-tag-2021]][gh-lnk-tag-2021] |
+| 2022 | [![Status][gh-img-fetch-2022]][gh-lnk-fetch-2022] | [![Status][gh-img-tag-2022]][gh-lnk-tag-2022] |
 
 <!-- Named links -->
 
@@ -54,6 +55,8 @@ Choose the appropriate branch to fetch the data.
 [gh-lnk-fetch-2020]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3AFetch+branch%3AEURUSD-2020
 [gh-img-fetch-2021]: https://github.com/FX-Data/FX-Data-EURUSD-DS/workflows/Fetch/badge.svg?branch=EURUSD-2021
 [gh-lnk-fetch-2021]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3AFetch+branch%3AEURUSD-2021
+[gh-img-fetch-2022]: https://github.com/FX-Data/FX-Data-EURUSD-DS/workflows/Fetch/badge.svg?branch=EURUSD-2022
+[gh-lnk-fetch-2022]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3AFetch+branch%3AEURUSD-2022
 
 [gh-img-tag-2007]: https://github.com/FX-Data/FX-Data-EURUSD-DS/workflows/Release/badge.svg?branch=2007
 [gh-lnk-tag-2007]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3ARelease+branch%3A2007
@@ -85,3 +88,5 @@ Choose the appropriate branch to fetch the data.
 [gh-lnk-tag-2020]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3ARelease+branch%3A2020
 [gh-img-tag-2021]: https://github.com/FX-Data/FX-Data-EURUSD-DS/workflows/Release/badge.svg?branch=2021
 [gh-lnk-tag-2021]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3ARelease+branch%3A2021
+[gh-img-tag-2022]: https://github.com/FX-Data/FX-Data-EURUSD-DS/workflows/Release/badge.svg?branch=2022
+[gh-lnk-tag-2022]: https://github.com/FX-Data/FX-Data-EURUSD-DS/actions?query=workflow%3ARelease+branch%3A2022
