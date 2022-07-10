@@ -38,16 +38,19 @@ jobs:
           Pairs: ${{ env.PAIR }}
       - name: Commit files
         env:
-          COMMIT_MSG: Adds CSV files for ${{ env.PAIR }} ${{ env.YEAR }}
+          COMMIT_MSG: >-
+            Adds CSV files for
+            ${{ env.PAIR }} ${{ env.YEAR }}.${{ matrix.month }}
           GIT_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_NAME: ${{ github.actor }}
         run: |
+          sudo chown -R $USER .
           git config --local core.autocrlf false
           git config --local user.email $GIT_EMAIL
           git config --local user.name $GIT_NAME
           git add **/*.csv && git add --renormalize **/*.csv
+          git pull origin ${{ github.ref }} --autostash --rebase -X ours
           git commit -avm "$COMMIT_MSG" || true
-          git pull origin ${{ github.ref }} --no-edit -X ours
           NO_PAGER=1 git status
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -56,7 +59,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Re-pull on failure
         if: ${{ failure() }}
-        run: git pull origin ${{ github.ref }} --no-edit -X ours
+        run: git pull origin ${{ github.ref }} --autostash --rebase -X ours
       - name: Re-push on failure
         if: ${{ failure() }}
         uses: ad-m/github-push-action@master
